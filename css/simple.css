@@ -1,0 +1,50 @@
+nav {
+  background: #449988;
+  color: white;
+  padding: 20px;
+}
+
+nav #banner {
+  display: inline;
+  margin: 30px;
+  font-size: 150%;
+  letter-spacing: 0.2em;
+}
+
+nav ul.menu {
+  display: inline-block;
+  vertical-align: +4px;
+}
+
+nav ul.menu li {
+  display: inline;
+  list-style-type:  none;
+  margin: 5px;
+  padding-bottom: 5px;
+  word-break: keep-all;
+}
+
+nav .selected {
+  border-bottom: 2px white solid;
+}
+
+html, body {
+  margin: 0;
+}
+
+div.content {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+section {
+  margin: 10px;
+  border-color: silver;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.7em;
+  padding: 0.7em;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
