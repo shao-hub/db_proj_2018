@@ -1,26 +1,41 @@
 nav {
-  background: #449988;
+  background: #559999;
   color: white;
+  line-height: 2.5em;
+  padding: 10px 0;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 nav #banner {
   display: inline-block;
-  margin: 10px 30px;
-  font-size: 150%;
+  margin-left: 50px;
+  font-size: 140%;
   letter-spacing: 0.2em;
+  margin-top: 5px;
+}
+
+nav .split {
+  flex-grow: 0.3;
 }
 
 nav ul.menu {
+  align-self: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 20px;
   display: inline-block;
-  vertical-align: +4px;
-  margin: 10px 0;
+  vertical-align: +6px;
+  flex-grow: 1;
 }
 
 nav ul.menu li {
   display: inline;
   list-style-type:  none;
   margin: 5px;
-  padding-bottom: 5px;
+  padding: 8px;
+  white-space: nowrap;
 }
 
 nav ul.menu li.selected {
