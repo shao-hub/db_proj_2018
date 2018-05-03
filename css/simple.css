@@ -33,7 +33,6 @@ nav ul.menu {
 nav ul.menu li {
   display: inline;
   list-style-type:  none;
-  margin: 5px;
   padding: 8px;
   white-space: nowrap;
 }
