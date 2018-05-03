@@ -1,12 +1,11 @@
 nav {
   background: #449988;
   color: white;
-  padding: 20px;
 }
 
 nav #banner {
-  display: inline;
-  margin: 30px;
+  display: inline-block;
+  margin: 10px 30px;
   font-size: 150%;
   letter-spacing: 0.2em;
 }
@@ -14,6 +13,7 @@ nav #banner {
 nav ul.menu {
   display: inline-block;
   vertical-align: +4px;
+  margin: 10px 0;
 }
 
 nav ul.menu li {
@@ -21,11 +21,14 @@ nav ul.menu li {
   list-style-type:  none;
   margin: 5px;
   padding-bottom: 5px;
-  word-break: keep-all;
 }
 
-nav .selected {
+nav ul.menu li.selected {
   border-bottom: 2px white solid;
+}
+
+nav ul.menu li:hover {
+  border-bottom: 2px yellow solid;
 }
 
 html, body {
