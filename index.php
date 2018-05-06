@@ -1,6 +1,5 @@
 <?php 
-  include_once 'some.php';
-
+  include_once 'connect.php';
 ?><!DOCTYPE html>
 <html>
 <head>
