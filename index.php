@@ -17,7 +17,18 @@
 <section>
   <h1>最新公告</h1>
   <hr>
-  <p>沒有最新公告，唬你的！</p>
+  <table>
+  <?php
+  $rs = $conn->query("SELECT * FROM foo");
+  while($row = $rs->fetch()) {
+    $title = $row->title;
+    $date = date("Y / m / d", $row->date);
+    echo '<tr>';
+    echo '<td>' . $date . '</td>';
+    echo '<td>' . $title . '</td>';
+    echo '</tr>';
+  } ?>
+  </table>
 </section>
 </div>
 </body>
