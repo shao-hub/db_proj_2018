@@ -7,6 +7,9 @@
   <meta charset="utf8">
   <link rel="stylesheet" href="css/simple.css">
   <title>NCTU Sports</title>
+  <!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <?php include ($path."/navbar.php"); ?>
