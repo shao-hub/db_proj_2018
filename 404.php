@@ -5,7 +5,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf8">
-  <link rel="stylesheet" href="css/simple.css">
+  <link rel="stylesheet" href="/css/simple.css">
   <title>找不到網頁 - NCTU Sports</title>
   <!--[if lt IE 9]>
   <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
