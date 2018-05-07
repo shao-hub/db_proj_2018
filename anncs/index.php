@@ -15,7 +15,6 @@
     $date = date("Y / m / d H:i", $date);
     $description = $row['description'];
     $description = htmlspecialchars($description, ENT_NOQUOTES);
-    $description = str_replace(["\n\n", "\n"], ["</p><p>", "\n"], $description);
   }
   else {
     $title = '找不到公告';
