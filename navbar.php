@@ -1,10 +1,11 @@
-<nav>
+<nav class="cyan-bg">
   <span id="banner">NCTU Sports</span>
   <span class="split"></span>
   <ul class="menu">
-    <li class="selected">首頁</li>
-    <li>活動報名</li>
-    <li>註冊</li>
-    <li>登入</li>
+    <li class="selected"><a href="/">首頁</a></li>
+    <li><a>活動報名</a></li>
+    <li><a>註冊</a></li>
+    <li><a>登入</a></li>
   </ul>
+  <span class="split-right"></span>
 </nav>
