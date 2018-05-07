@@ -20,7 +20,7 @@
   if (isset($_GET['page'])) $page = $_GET['page'];
   else $page = 1;
   $page = intval($page, 10);
-  if ($page < 1) $page = 1;
+  if ($page < 1 || $page > 214748364) $page = 1;
   $sql = "SELECT * FROM announcement ORDER BY date DESC LIMIT :page, 10";
   $q = $conn->prepare($sql);
   $recno = ($page - 1) * 10;
