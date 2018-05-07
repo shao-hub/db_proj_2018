@@ -38,7 +38,7 @@
 <?php if ($row) { ?>
   <h1><?= $title ?></h1>
   <div class="cyan-text"><?= $date ?></div>
-  <div style="margin-left: 10px; white-space: pre;"><p><?= $description ?></p></div>
+  <div style="margin-left: 10px; white-space: pre-wrap;"><p><?= $description ?></p></div>
 <?php } else { ?>
   <h1>找不到公告</h1>
   <p>可能是該公告已被移除，或是網站出了錯誤</p>

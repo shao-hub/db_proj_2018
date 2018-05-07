@@ -45,6 +45,33 @@
     if ($page == 1) { ?><p>目前沒有公告！</p><?php }
     else { ?><p>到底了！</p><?php }
   } ?> 
+  <div class="text-center"><ul class="change-page">
+  <?php
+  // calculate total pages
+  $sql = "SELECT COUNT(*) As cnt FROM announcement";
+  $q = $conn->prepare($sql);
+  $q->execute();
+  $row = $q->fetch();
+  $maxPage = ceil($row['cnt'] / 10);
+  // output paginator <<
+  if ($page > 1) {
+    $prevPage = $page-1;
+    echo "    <li><a href=\"?page=$prevPage\">«</a>\n";
+  }
+  // output paginator 1~10
+  $minCanSee = max(min($page, $maxPage - 3) - 3, 1);
+  $maxCanSee = min($minCanSee + 6, $maxPage);
+  for ($i = $minCanSee; $i <= $maxCanSee; $i++) {
+    echo '    <li';
+    if ($i == $page) echo ' class="selected"';
+    echo "><a href=\"?page=$i\">$i</a>\n";
+  }
+  // output paginator >>
+  if ($page < $maxPage) {
+    $nextPage = $page+1;
+    echo "    <li><a href=\"?page=$nextPage\">»</a>\n";
+  } ?>
+  </ul></div>
 </section>
 </div>
 </body>
