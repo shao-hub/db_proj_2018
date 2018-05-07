@@ -62,12 +62,13 @@ if ($post) $yes = addAnnouncement($conn);
   <form action="" method="post">
     <p>
       <label for="title">標題</label><br>
-      <input type="text" name="title" size="50" id="title"/>
+      <input type="text" name="title" id="title"
+        style="width:100%;"/>
     </p>
     <p>
       <label for="description">內容</label><br>
-      <textarea name="description" rows="8" cols="50" style="width:100%;"
-        id="description"></textarea>
+      <textarea name="description" rows="8" cols="50" id="description"
+        style="width:100%;"></textarea>
     </p>
     <p style="text-align:right;">
       <button type="submit">發佈</button>
