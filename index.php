@@ -37,7 +37,7 @@
   <tr>
     <td class="date"><?= $date ?></td>
     <td>
-      <a class="cyan-text no-underline" href="anncs.php?id=<?= $id ?>"><?= $title ?></a>
+      <a class="cyan-text no-underline" href="anncs?id=<?= $id ?>"><?= $title ?></a>
     </td>
   </tr><?php } ?> 
   </table>
