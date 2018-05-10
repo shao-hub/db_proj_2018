@@ -1,6 +1,6 @@
 # db_proj_2018
 
-Apache2 mode_rewrite must be enabled. <br>
+Apache2 mod_rewrite must be enabled. <br>
 See the below link for how to enable it on Ubuntu 16.04.<br>
 https://www.digitalocean.com/community/tutorials/how-to-rewrite-urls-with-mod_rewrite-for-apache-on-ubuntu-16-04 
 
