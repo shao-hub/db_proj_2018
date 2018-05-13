@@ -10,8 +10,6 @@ class Register extends Controller
 
     public function index()
     {
-        echo 'Message from Controller: You are in the Controller: Songs, using the method index().';
-
         require 'application/views/_templates/header.php';
         require 'application/views/register/index.php';
         require 'application/views/_templates/footer.php';
@@ -20,8 +18,6 @@ class Register extends Controller
 
     public function signup()
     {
-        echo 'Message from Controller: You are in the Controller: Register, using the method signup().';
-
         // if we have POST data to create a new song entry
         if (isset($_POST["submit_signup_account"])) {
             // load model, perform an action on the model
