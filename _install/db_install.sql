@@ -19,7 +19,7 @@
 -- Current Database: `db_proj_2018`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `db_proj_2018` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `db_proj_2018` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 
 USE `db_proj_2018`;
 
@@ -59,10 +59,11 @@ DROP TABLE IF EXISTS `anncs`;
 CREATE TABLE `anncs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
-  `date` date NOT NULL,
-  `description` varchar(2048) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `description` varchar(2048) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `date` (`date`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +90,7 @@ CREATE TABLE `events` (
   `team_limit` int(11) NOT NULL,
   `team_size_limit` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +144,7 @@ CREATE TABLE `teams` (
   PRIMARY KEY (`id`),
   KEY `fk_teams_events_idx` (`event_id`),
   CONSTRAINT `fk_teams_events` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
