@@ -34,10 +34,20 @@ class Application
             if (method_exists($this->url_controller, $this->url_action)) {
                 if (!empty($this->url_params)) {
                     // Call the method and pass arguments to it
+                    try {
                     call_user_func_array(array($this->url_controller, $this->url_action), $this->url_params);
+                    }
+                    catch (ArgumentCountError $x) {
+                        $this->problem(400);
+                    }
                 } else {
                     // If no parameters are given, just call the method without parameters, like $this->home->method();
+                    try {
                     $this->url_controller->{$this->url_action}();
+                    }
+                    catch (ArgumentCountError $x) {
+                        $this->problem(400);
+                    }
                 }
             } else {
                 if (strlen($this->url_action) == 0) {
@@ -45,11 +55,13 @@ class Application
                     $this->url_controller->index();
                 }
                 else {
-                    header('location: ' . URL . 'problem');
+                    //header('location: ' . URL . 'problem');
+                    $this->problem(405);
                 }
             }
         } else {
-            header('location: ' . URL . 'problem');
+            //header('location: ' . URL . 'problem');
+            $this->problem(404);
         }
     }
     /**
@@ -76,5 +88,12 @@ class Application
             //echo 'Action: ' . $this->url_action . '<br>';
             //echo 'Parameters: ' . print_r($this->url_params, true) . '<br>';
         }
+    }
+    
+    private function problem($code) {
+        require APP . 'controller/problem.php';
+        $page = new Problem();
+        http_response_code($code);
+        $page->index();
     }
 }

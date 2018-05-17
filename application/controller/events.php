@@ -6,9 +6,6 @@ class Events extends Controller
 
     public function index()
     {
-        // simple message to show where you are
-        echo 'Message from Controller: You are in the Controller: Events, using the method index().';
-
         // load a model, perform an action, pass the returned data to a variable
         // NOTE: please write the name of the model "LikeThis"
         $events_model = $this->loadModel('EventsModel');
@@ -29,9 +26,6 @@ class Events extends Controller
 
     public function add()
     {
-        // simple message to show where you are
-        echo 'Message from Controller: You are in the Controller: events, using the method add().';
-
         if(!Auth::isAdmin())
         {
             header('location: ' . URL . 'events/index');
@@ -55,9 +49,6 @@ class Events extends Controller
 
     public function edit($event_id)
     {
-        // simple message to show where you are
-        echo 'Message from Controller: You are in the Controller: events, using the method add().';
-
         if(!Auth::isAdmin())
         {
             header('location: ' . URL . 'events/index');
@@ -80,8 +71,6 @@ class Events extends Controller
 
     public function delete($event_id)
     {
-        echo 'Message from Controller: You are in the Controller: Events, using the method delete().';
-
         if(!Auth::isAdmin())
         {
             header('location: ' . URL . 'events/index');
@@ -100,8 +89,6 @@ class Events extends Controller
 
     public function status()
     {
-        echo 'Message from Controller: You are in the Controller: Anncs, using the method delete().';
-
         if(!Auth::isAdmin())
         {
             header('location: ' . URL . 'events/index');
@@ -164,9 +151,6 @@ _END;
 
     public function signup($event_id)
     {
-        // simple message to show where you are
-        echo 'Message from Controller: You are in the Controller: Anncs, using the method getDetail().';
-
         require 'application/views/_templates/header.php';
         require 'application/views/events/signup.php';
         require 'application/views/_templates/footer.php';

@@ -8,36 +8,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- css -->
     <link href="<?php echo URL; ?>public/css/style.css" rel="stylesheet">
-    -->
     <!-- jQuery
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     -->
-    <!-- our JavaScript
-    <script src="<?php echo URL; ?>public/js/application.js"></script>
-    -->
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 <!-- header -->
 <div class="container">
-    <!-- Info -->
-    <div class="where-are-we-box">
-        Everything in this box is loaded from <span class="bold">application/views/_templates/header.php</span> !
-        <br />
-        The green line is added via JavaScript (to show how to integrate JavaScript).
-    </div>
-    <h1>The header (used on all pages)</h1>
-    <!-- demo image
-    <h3>Demo image, to show usage of public/img folder</h3>
-    <div>
-        <img src="<?php echo URL; ?>public/img/demo-image.png" />
-    </div>
-    <!-- navigation -->
-    <h3>Navigation</h3>
-    <div class="navigation">
-        <ul>
+    <nav class="navigation cyan-bg">
+        <span id="banner">NCTU Sports</span>
+        <span class="split"></span>
+        <ul class="menu">
             <!-- same like "home" or "home/index" -->
-            <li><a href="<?php echo URL; ?>">HOME</a></li>
-            <li><a href="<?php echo URL; ?>events">EVENTS</a></li>
+            <li><a href="<?php echo URL; ?>">首頁</a></li>
+            <li><a href="<?php echo URL; ?>events">活動報名</a></li>
             <?php
                 if(Auth::isLogin())
                 {
@@ -46,20 +33,21 @@
             if(Auth::isAdmin())
             {
                 ?>
-                <li><a href="<?php echo URL; ?>events/status">EVENT STATUS</a></li>
+            <li><a href="<?php echo URL; ?>events/status">報名狀況</a></li>
                 <?php
             }
                 ?>
-                    <li><?php echo Auth::getUserName() ?></li>
-                    <li><a href="<?php echo URL; ?>login/logoutAccount">LOGOUT</a></li>
+
+            <li><?php echo Auth::getUserName() ?></li>
+            <li><a href="<?php echo URL; ?>login/logoutAccount">登出</a></li>
                     <?php
                 }
                 else
                 {
                     ?>
 
-                    <li><a href="<?php echo URL; ?>register">REGISTER</a></li>
-                    <li><a href="<?php echo URL; ?>login">LOGIN</a></li>
+            <li><a href="<?php echo URL; ?>register">註冊</a></li>
+            <li><a href="<?php echo URL; ?>login">登入</a></li>
 
                     <?php
                 }
@@ -67,7 +55,8 @@
 
             <!-- "songs" and "songs/index" are the same -->
         </ul>
-    </div>
+        <span class="split-right"></span>
+    </nav>
     <!-- simple div for javascript output, just to show how to integrate js into this MVC construct -->
     <!--
     <h3>Demo JavaScript</h3>

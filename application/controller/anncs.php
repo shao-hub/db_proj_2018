@@ -17,9 +17,6 @@ class Anncs extends Controller
      */
     public function index()
     {
-        // simple message to show where you are
-        echo 'Message from Controller: You are in the Controller: Songs, using the method index().';
-
         // load a model, perform an action, pass the returned data to a variable
         // NOTE: please write the name of the model "LikeThis"
         $anncs_model = $this->loadModel('AnncsModel');
@@ -40,9 +37,6 @@ class Anncs extends Controller
 
     public function add()
     {
-        // simple message to show where you are
-        echo 'Message from Controller: You are in the Controller: Anncs, using the method add().';
-
         if(!Auth::isAdmin())
         {
             header('location: ' . URL . 'anncs/index');
@@ -65,8 +59,6 @@ class Anncs extends Controller
 
     public function delete($annc_id)
     {
-        echo 'Message from Controller: You are in the Controller: Anncs, using the method delete().';
-
         if(!Auth::isAdmin())
         {
             header('location: ' . URL . 'anncs/index');
@@ -85,9 +77,6 @@ class Anncs extends Controller
 
     public function getDetail($annc_id)
     {
-        // simple message to show where you are
-        echo 'Message from Controller: You are in the Controller: Anncs, using the method getDetail().';
-
         // if we have POST data to create a new song entry
 
         $anncs_model = $this->loadModel('AnncsModel');
