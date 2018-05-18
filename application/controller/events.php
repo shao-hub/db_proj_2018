@@ -102,46 +102,20 @@ class Events extends Controller
 
         foreach($events as $event)
         {
-            echo<<<_END
-            <div class="container">
-            <h2>You are in the View: application/views/events/status.php (everything in this box comes from that file)</h2>
-            <!-- main content output -->
-            <div>
-                
-_END;
-            if (isset($event->name))
-            echo '<h2>'.$event->name.'</h2>';
-            echo<<<_END
-                    <table>
-                        <thead style="background-color: #ddd; font-weight: bold;">
-                        <tr>
-                            <td>Team Name</td>
-                            <td>Team Members</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-_END;
+
+            require 'application/views/events/status_header.php';
 
             $teams=$events_model->getAllTeams($event->id);
             foreach($teams as $team)
             {
-                echo "<tr>";
-                if (isset($team->name))
-                    echo '<td>'.$team->name.'</td>';
 
                 $members=$events_model->getAllTeamMembers($team->id);
 
                 require 'application/views/events/status_member.php';
 
-                echo '</tr>';
-
             }
-            echo<<<_END
-                        </tbody>
-                </table>
-            </div>
-        </div>
-_END;
+
+            require 'application/views/events/status_footer.php';
 
         }
 
