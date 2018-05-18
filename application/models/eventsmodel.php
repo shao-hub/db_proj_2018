@@ -70,7 +70,7 @@ class EventsModel
     {
         $sql = "SELECT * FROM account Where id=:user_id";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':$user_id' => $user_id));
+        $query->execute(array(':user_id' => $user_id));
 
         // fetchAll() is the PDO method that gets all result rows, here in object-style because we defined this in
         // libs/controller.php! If you prefer to get an associative array as the result, then do
@@ -86,6 +86,22 @@ class EventsModel
         $sql = "INSERT INTO events (name, `date`, team_limit,team_size_limit ) VALUES (:name, :date, :team_limit,:team_size_limit)";
         $query = $this->db->prepare($sql);
         $query->execute(array(':name' => $name, ':date' => $date, ':team_limit' => $team_limit,':team_size_limit' => $team_size_limit));
+    }
+
+    public function addTeam($name, $event_id,$team_members)
+    {
+        // clean the input from javascript code for example
+
+        $sql = "INSERT INTO teams (name, event_id) VALUES (:name, :event_id)";
+        $query = $this->db->prepare($sql);
+        $query->execute(array(':name' => $name, ':event_id' => $event_id));
+        $team_id=$this->db->lastInsertId();
+        $sql = "INSERT INTO team_members (team_id, user_id) VALUES (:team_id, :user_id)";
+        foreach ($team_members as $id => $name)
+        {
+            $query = $this->db->prepare($sql);
+            $query->execute(array(':team_id' => $team_id, ':user_id' => $id));
+        }
     }
 
     public function editEvent($id,$name, $date, $team_limit,$team_size_limit)

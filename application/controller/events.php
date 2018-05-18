@@ -125,8 +125,69 @@ class Events extends Controller
 
     public function signup($event_id)
     {
+        if(!Auth::isLogin())
+        {
+            header('location: ' . URL . 'events/index');
+            return;
+        }
+
+        $events_model = $this->loadModel('EventsModel');
+        $event_info=$events_model->getEvent($event_id);
+
+        $err_msg=null;
+
+        if(isset($_SESSION['signup'])
+            &&is_array($_SESSION['signup'])
+            &&isset($_SESSION['signup']['event_id'])
+            &&$_SESSION['signup']['event_id']!=$event_id)
+        {
+            unset($_SESSION['signup']);
+        }
+
+        if(!isset($_SESSION['signup']))
+        {
+            $_SESSION['signup']=array();
+            $_SESSION['signup']['event_id']=$event_id;
+        }
+
+        if(!isset($_SESSION['signup']['player_added']))
+            $_SESSION['signup']['player_added']=array();
+
+        if(isset($_POST['submit_add_team']))
+        {
+            $events_model->addTeam($_POST['name'],$event_id,$_SESSION['signup']['player_added']);
+            unset($_SESSION['signup']);
+            header('location: ' . URL . 'events/index');
+            return;
+        }
+
+        if (isset($_POST["submit_add_player"]))
+        {
+            $player_info=$events_model->getAccount($_POST["id"]);
+            if(!$player_info)
+            {
+                $err_msg="cannot find player ".$_POST["id"];
+            }
+            else
+            {
+                if(array_key_exists($_POST["id"],$_SESSION['signup']['player_added']))
+                {
+                    $err_msg="player ".$_POST["id"]." is already added";
+                }
+                else
+                {
+                    $_SESSION['signup']['player_added'][$_POST["id"]]=$player_info->name;
+                }
+            }
+
+        }
+
         require 'application/views/_templates/header.php';
-        require 'application/views/events/signup.php';
+        require 'application/views/events/signup_header.php';
+        require 'application/views/events/signup_showplayers.php';
+        if(count($_SESSION['signup']['player_added'])<$event_info->team_size_limit)
+            require 'application/views/events/signup_addplayer.php';
+        require 'application/views/events/signup_footer.php';
         require 'application/views/_templates/footer.php';
     }
 }
