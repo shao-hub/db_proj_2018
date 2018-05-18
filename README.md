@@ -15,7 +15,7 @@ File `application/config/config.php` is no longer tracked. Please copy `applicat
 
 <h2>To-Do List</h2>
 1.delete confirmation<br>
-2.user sign up events<br>
+2.user sign up events (Need someone to add the function of checking constraint such as team_limit or team_size_limit)<br>
 3.extend user registration page and MySQL db fields (see the spec given by TA)<br>
 4.bonus functions...<br>
 
