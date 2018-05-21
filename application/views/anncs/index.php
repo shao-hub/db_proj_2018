@@ -1,34 +1,39 @@
-<div class="container">
-    <h2>You are in the View: application/views/anncs/index.php (everything in this box comes from that file)</h2>
+<div class="content"><section>
+    <h1>最新公告</h1>
     <!-- main content output -->
     <div>
         <?php
         if(Auth::isAdmin())
         {
             ?>
-            <a href="<?php echo URL . 'anncs/add' ; ?>">add an announcement</a><br>
+            <a style="float:right;" class="button blue" href="<?php echo URL . 'anncs/add' ; ?>">新增公告</a><br>
         <?php
         }
         ?>
 
         <table>
-            <thead style="background-color: #ddd; font-weight: bold;">
+            <thead class="cyan-bg">
             <tr>
-                <td>title</td>
-                <td>date</td>
+                <td class="date">日期</td>
+                <td>標題</td>
+                <?php if (Auth::isAdmin()) { ?><td width="30"></td><?php } ?> 
             </tr>
             </thead>
             <tbody>
             <?php foreach ($anncs as $annc) { ?>
                 <tr>
-                    <td><?php if (isset($annc->title)) echo $annc->title; ?></td>
-                    <td><?php if (isset($annc->date)) echo $annc->date; ?></td>
-                    <td><a href="<?php echo URL . 'anncs/getDetail/' . $annc->id; ?>">detail</a></td>
+                    <td class="date"><?php
+                        if (isset($annc->date))
+                            echo preg_replace('/^(\d+)-(\d+)-(\d+).*/', "$1 / $2 / $3", $annc->date, 1);
+                    ?></td>
+                    <td>
+                        <a class="cyan-text no-underline" href="<?php echo URL . 'anncs/getDetail/' . $annc->id; ?>"><?php if (isset($annc->title)) echo $annc->title; ?></a>
+                    </td>
                     <?php
                         if(Auth::isAdmin())
                         {
                             ?>
-                            <td><a href="<?php echo URL . 'anncs/delete/' . $annc->id; ?>">x</a></td>
+                            <td><a class="button red" href="<?php echo URL . 'anncs/delete/' . $annc->id; ?>">x</a></td>
                     <?php
                         }
                     ?>
@@ -38,4 +43,4 @@
         </table>
 
     </div>
-</div>
+</section></div>

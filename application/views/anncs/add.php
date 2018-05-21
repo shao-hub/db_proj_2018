@@ -1,7 +1,6 @@
-<div class="container">
-    <h2>You are in the View: application/views/anncs/add.php (everything in this box comes from that file)</h2>
-    <!-- main content output -->
+<div class="content"><section>
     <div>
+        <h1>新增公告</h1>
         <form action="<?php echo URL; ?>anncs/add" id="add_anncs_form" method="POST">
             <label>Title</label>
             <input type="text" name="title" value="" required><br>
@@ -14,4 +13,4 @@
         <textarea name="description" form="add_anncs_form"></textarea>
 
     </div>
-</div>
+</section></div>

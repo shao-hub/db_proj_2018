@@ -72,7 +72,8 @@ section {
   border-width: 1px;
   border-style: solid;
   border-radius: 0.7em;
-  padding: 0 0.7em;
+  padding: 0.7em;
+  padding-top: 0;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -80,6 +81,7 @@ section {
 
 .cyan-bg {
   background-color: #559999;
+  color: white;
 }
 
 .cyan-text {
@@ -87,8 +89,14 @@ section {
 }
 
 table {
+  table-layout: fixed;
   border-collapse: collapse;
   width: 100%;
+}
+
+thead {
+  font-weight: bold;
+  text-align: center;
 }
 
 table tr {
@@ -97,6 +105,8 @@ table tr {
 
 table td {
   padding: 10px 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 td.date {
@@ -167,4 +177,32 @@ td.date {
 }
 .change-page > .selected > a:focus {
   background-color: #448888;
+}
+
+.button {
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  padding: 5px 8px;
+  margin: 5px;
+  background-color: gray;
+  font-size: 90%;
+}
+.button.blue {
+  background-color: #5588cc;
+}
+.button.blue:hover {
+  background-color: #6699dd;
+}
+.button.blue:focus {
+  background-color: #4477bb;
+}
+.button.red {
+  background-color: #dd7777;
+}
+.button.red:hover {
+  background-color: #ee8888;
+}
+.button.red:focus {
+  background-color: #cc6666;
 }
