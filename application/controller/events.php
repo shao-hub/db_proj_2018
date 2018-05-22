@@ -22,23 +22,24 @@ class Events extends Controller
         require 'application/views/_templates/footer.php';
     }
 
+    private function redirectToHome()
+    {
+        header('location: ' . URL . 'events/index');
+        exit();
+    }
+
 
 
     public function add()
     {
         if(!Auth::isAdmin())
-        {
-            header('location: ' . URL . 'events/index');
-            return;
-        }
+            $this->redirectToHome();
 
-        // if we have POST data to create a new song entry
         if (isset($_POST["submit_add_event"])) {
             // load model, perform an action on the model
             $events_model=$this->loadModel('EventsModel');
             $events_model->addEvent($_POST["name"], $_POST["date"],  $_POST["team_limit"],$_POST["team_size_limit"]);
-            header('location: ' . URL . 'events/index');
-            return;
+            $this->redirectToHome();
         }
 
         require 'application/views/_templates/header.php';
@@ -50,18 +51,14 @@ class Events extends Controller
     public function edit($event_id)
     {
         if(!Auth::isAdmin())
-        {
-            header('location: ' . URL . 'events/index');
-            return;
-        }
+            $this->redirectToHome();
 
         // if we have POST data to create a new song entry
         if (isset($_POST["submit_edit_event"])) {
             // load model, perform an action on the model
             $events_model=$this->loadModel('EventsModel');
             $events_model->editEvent($event_id,$_POST["name"], $_POST["date"],  $_POST["team_limit"],$_POST["team_size_limit"]);
-            header('location: ' . URL . 'events/index');
-            return;
+            $this->redirectToHome();
         }
 
         require 'application/views/_templates/header.php';
@@ -72,10 +69,7 @@ class Events extends Controller
     public function delete($event_id)
     {
         if(!Auth::isAdmin())
-        {
-            header('location: ' . URL . 'events/index');
-            return;
-        }
+            $this->redirectToHome();
 
 
         if (Auth::isAdmin()&&isset($event_id))
@@ -84,16 +78,13 @@ class Events extends Controller
             $anncs_model->deleteEvent($event_id);
         }
 
-        header('location: ' . URL . 'events/index');
+        $this->redirectToHome();
     }
 
     public function status()
     {
         if(!Auth::isAdmin())
-        {
-            header('location: ' . URL . 'events/index');
-            return;
-        }
+            $this->redirectToHome();
 
         require 'application/views/_templates/header.php';
 
@@ -126,10 +117,7 @@ class Events extends Controller
     public function signup($event_id)
     {
         if(!Auth::isLogin())
-        {
-            header('location: ' . URL . 'events/index');
-            return;
-        }
+            $this->redirectToHome();
 
         $events_model = $this->loadModel('EventsModel');
         $event_info=$events_model->getEvent($event_id);
@@ -157,8 +145,7 @@ class Events extends Controller
         {
             $events_model->addTeam($_POST['name'],$event_id,$_SESSION['signup']['player_added']);
             unset($_SESSION['signup']);
-            header('location: ' . URL . 'events/index');
-            return;
+            $this->redirectToHome();
         }
 
         if (isset($_POST["submit_add_player"]))
