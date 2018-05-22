@@ -13,7 +13,7 @@ Options -Indexes
 RewriteBase /db_proj_2018/
 
 # remove trailing slash and "index" from url
-RewriteRule ^/?(.*)/(index)?$   $1   [R,L]
+RewriteRule ^/?([^/]+)/(index/?)?$   $1   [R,L]
 
 # General rewrite rules
 RewriteCond %{REQUEST_FILENAME} !-d
