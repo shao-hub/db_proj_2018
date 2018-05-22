@@ -23,7 +23,7 @@
                 <tr>
                     <td><?php if (isset($event->name)) echo $event->name; ?></td>
                     <td><?php if (isset($event->date)) echo $event->date; ?></td>
-                    <?php if (Auth::isLogin()) echo '<td><a href=events/signup/' . $event->id . '>signup</a></td>' ; ?>
+                    <?php if (Auth::isLogin()) echo '<td><a href="'.URL.'events/signup/' . $event->id . '">signup</a></td>' ; ?>
                     <?php
                     if(Auth::isAdmin())
                     {
