@@ -16,15 +16,27 @@ class Register extends Controller
     }
 
 
+
     public function signup()
     {
         // if we have POST data to create a new song entry
-        if (isset($_POST["submit_signup_account"])) {
-            // load model, perform an action on the model
-            $anncs_model=$this->loadModel('RegisterModel');
-            $anncs_model->addAccount($_POST["user_id"], $_POST["user_pw"],$_POST["user_name"] );
-            header('location: ' . URL . 'anncs/index');
+        if (isset($_POST["submit_signup_account"]))
+        {
+            $register_model=$this->loadModel('RegisterModel');
+            if($register_model->verifyReCaptcha($_POST['g-recaptcha-response'])==false)
+            {
+                $this->redirectToHome();
+                return;
+            }
+            $register_model->addAccount($_POST["user_id"], $_POST["user_pw"],$_POST["user_name"] );
+            $this->redirectToHome();
         }
+    }
+
+    private function redirectToHome()
+    {
+        header('location: ' . URL . 'anncs/index');
+        exit();
     }
 
 }

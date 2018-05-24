@@ -29,3 +29,6 @@ define('DB_HOST', '127.0.0.1');
 define('DB_NAME', 'db_proj_2018');
 define('DB_USER', 'root');
 define('DB_PASS', '123456');
+
+define('RECAPTCHA_SITEKEY', 'SITEKEY');
+define('RECAPTCHA_SECRETKEY', 'SECRETKEY');
