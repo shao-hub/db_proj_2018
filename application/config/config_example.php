@@ -30,5 +30,5 @@ define('DB_NAME', 'db_proj_2018');
 define('DB_USER', 'root');
 define('DB_PASS', '123456');
 
-define('RECAPTCHA_SITEKEY', 'SITEKEY');
-define('RECAPTCHA_SECRETKEY', 'SECRETKEY');
+define('RECAPTCHA_SITEKEY', '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI');
+define('RECAPTCHA_SECRETKEY', '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe');
