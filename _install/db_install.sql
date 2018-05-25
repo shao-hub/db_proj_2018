@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
   `id` varchar(45) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `name` varchar(45) NOT NULL,
+  `name` varchar(45) CHARACTER SET utf8mb4 NOT NULL,
   `is_admin` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
