@@ -14,6 +14,8 @@
     <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
+    <!-- delete confirmation -->
+    <script src="<?php echo URL; ?>public/js/deleteconfirm.js" defer></script>
 </head>
 <body>
 <!-- header -->
@@ -22,7 +24,6 @@
         <span id="banner">NCTU Sports</span>
         <span class="split"></span>
         <ul class="menu">
-            <!-- same like "home" or "home/index" -->
             <li><a href="<?php echo URL; ?>">首頁</a></li>
             <li><a href="<?php echo URL; ?>events">活動報名</a></li>
             <?php
@@ -52,15 +53,7 @@
                     <?php
                 }
                 ?>
-
-            <!-- "songs" and "songs/index" are the same -->
         </ul>
         <span class="split-right"></span>
     </nav>
-    <!-- simple div for javascript output, just to show how to integrate js into this MVC construct -->
-    <!--
-    <h3>Demo JavaScript</h3>
-    <div id="javascript-header-demo-box">
-    </div>
-    -->
 </div>

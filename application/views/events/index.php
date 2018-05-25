@@ -30,7 +30,7 @@
                         ?>
                         <td><a href="<?php echo URL . 'events/edit/' . $event->id; ?>">edit</a></td>
                         <td><a href="<?php echo URL . 'events/status/' . $event->id; ?>">status</a></td>
-                        <td><a href="<?php echo URL . 'events/delete/' . $event->id; ?>">delete</a></td>
+                        <td><a href="<?php echo URL . 'events/delete/' . $event->id; ?>" class="delete_confirm" >delete</a></td>
                         <?php
                     }
                     ?>
