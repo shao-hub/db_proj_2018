@@ -114,6 +114,51 @@ class Events extends Controller
 
     }
 
+    public function delete_signup($event_id)
+    {
+        if(!Auth::isLogin())
+        {
+            $this->redirectToHome();
+        }
+
+        $events_model = $this->loadModel('EventsModel');
+
+        $joined_teams=$events_model->getUserJoinTeams(Auth::getUserId(),$event_id);
+
+        foreach ($joined_teams as $joined_team)
+        {
+            $events_model->deleteTeam($joined_team->id,$event_id);
+        }
+
+        $this->redirectToHome();
+    }
+
+    public function checkUserId()
+    {
+        if(!Auth::isLogin())
+        {
+            exit();
+        }
+
+        if(isset($_POST["id"]))
+        {
+            $obj=new stdClass();
+            $register_model=$this->loadModel('RegisterModel');
+            $result=$register_model->findAccount($_POST["id"]);
+            if($result)
+            {
+                $obj->valid="true";
+                $obj->name=$result->name;
+            }
+            else
+            {
+                $obj->valid="false";
+            }
+            $JSON=json_encode($obj);
+            echo $JSON;
+        }
+    }
+
     public function signup($event_id)
     {
         if(!Auth::isLogin())
@@ -124,57 +169,28 @@ class Events extends Controller
 
         $err_msg=null;
 
-        if(isset($_SESSION['signup'])
-            &&is_array($_SESSION['signup'])
-            &&isset($_SESSION['signup']['event_id'])
-            &&$_SESSION['signup']['event_id']!=$event_id)
-        {
-            unset($_SESSION['signup']);
-        }
+        require 'application/views/_templates/header.php';
+        require 'application/views/events/signup.php';
+        require 'application/views/_templates/footer.php';
+    }
 
-        if(!isset($_SESSION['signup']))
+    public function signup_team()
+    {
+        if(!Auth::isLogin())
         {
-            $_SESSION['signup']=array();
-            $_SESSION['signup']['event_id']=$event_id;
-        }
-
-        if(!isset($_SESSION['signup']['player_added']))
-            $_SESSION['signup']['player_added']=array();
-
-        if(isset($_POST['submit_add_team']))
-        {
-            $events_model->addTeam($_POST['name'],$event_id,$_SESSION['signup']['player_added']);
-            unset($_SESSION['signup']);
             $this->redirectToHome();
         }
-
-        if (isset($_POST["submit_add_player"]))
+        if(isset($_POST["json"]))
         {
-            $player_info=$events_model->getAccount($_POST["id"]);
-            if(!$player_info)
-            {
-                $err_msg="cannot find player ".$_POST["id"];
-            }
-            else
-            {
-                if(array_key_exists($_POST["id"],$_SESSION['signup']['player_added']))
-                {
-                    $err_msg="player ".$_POST["id"]." is already added";
-                }
-                else
-                {
-                    $_SESSION['signup']['player_added'][$_POST["id"]]=$player_info->name;
-                }
-            }
-
+            $events_model = $this->loadModel('EventsModel');
+            $obj = json_decode($_POST["json"], false);
+            $events_model->addTeam($obj->team_name,$obj->event_id,$obj->team_members);
         }
 
-        require 'application/views/_templates/header.php';
-        require 'application/views/events/signup_header.php';
-        require 'application/views/events/signup_showplayers.php';
-        if(count($_SESSION['signup']['player_added'])<$event_info->team_size_limit)
-            require 'application/views/events/signup_addplayer.php';
-        require 'application/views/events/signup_footer.php';
-        require 'application/views/_templates/footer.php';
+        $obj=new stdClass();
+        $obj->valid="true";
+        $JSON=json_encode($obj);
+        echo $JSON;
+
     }
 }

@@ -16,6 +16,7 @@ class Application
         session_start();
 
         require_once APP.'utils/auth.php';
+        require_once APP.'utils/msg.php';
 
         // create array with URL parts in $url
         $this->splitUrl();

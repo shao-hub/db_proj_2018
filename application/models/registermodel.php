@@ -15,13 +15,21 @@ class RegisterModel
         }
     }
 
-    public function addAccount($id, $password, $name)
+    public function findAccount($id)
+    {
+        $sql = "select * from account where id=:id";
+        $query = $this->db->prepare($sql);
+        $query->execute(array(':id' => $id));
+        return $query->fetch();
+    }
+
+    public function addAccount($id, $password, $name, $email)
     {
         // clean the input from javascript code for example
 
-        $sql = "INSERT INTO account (id, password, name ) VALUES (:id, :password, :name)";
+        $sql = "INSERT INTO account (id, password, name, email ) VALUES (:id, :password, :name, :email)";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':id' => $id, ':password' => password_hash($password,PASSWORD_DEFAULT),':name' => $name));
+        $query->execute(array(':id' => $id, ':password' => password_hash($password,PASSWORD_DEFAULT),':name' => $name,':email' => $email));
     }
 
     public function verifyReCaptcha($response)

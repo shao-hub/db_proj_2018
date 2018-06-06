@@ -28,8 +28,25 @@ class Register extends Controller
                 $this->redirectToHome();
                 return;
             }
-            $register_model->addAccount($_POST["user_id"], $_POST["user_pw"],$_POST["user_name"] );
+            $register_model->addAccount($_POST["user_id"], $_POST["user_pw"],$_POST["user_name"],$_POST["user_email"] );
             $this->redirectToHome();
+        }
+    }
+
+    public function checkUserId()
+    {
+
+        if(isset($_POST["id"]))
+        {
+            $obj=new stdClass();
+            $obj->valid="false";
+            $register_model=$this->loadModel('RegisterModel');
+            if($register_model->findAccount($_POST["id"])==false)
+            {
+                $obj->valid="true";
+            }
+            $JSON=json_encode($obj);
+            echo $JSON;
         }
     }
 
@@ -38,5 +55,7 @@ class Register extends Controller
         header('location: ' . URL . 'anncs/index');
         exit();
     }
+
+
 
 }

@@ -16,6 +16,11 @@
     <![endif]-->
     <!-- delete confirmation -->
     <script src="<?php echo URL; ?>public/js/deleteconfirm.js" defer></script>
+    <script>
+        var Globals =<?php echo json_encode(array(
+            'URL' => URL
+        )); ?>;
+    </script>
 </head>
 <body>
 <!-- header -->
@@ -57,3 +62,11 @@
         <span class="split-right"></span>
     </nav>
 </div>
+<?php
+    if (Msg::ChkMsgExist())
+    {
+        ?>
+        <h6><?php echo Msg::GetandClrMsg() ?></h6>
+<?php
+    }
+    ?>
