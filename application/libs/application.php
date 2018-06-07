@@ -35,10 +35,12 @@ class Application
             if (method_exists($this->url_controller, $this->url_action)) {
                 if (!empty($this->url_params)) {
                     // Call the method and pass arguments to it
-                    try {
-                    call_user_func_array(array($this->url_controller, $this->url_action), $this->url_params);
+                    $method = new ReflectionMethod($this->url_controller, $this->url_action);
+                    $num_of_params = $method->getNumberOfRequiredParameters();
+                    if (count($this->url_params) >= $num_of_params) {
+                        call_user_func_array(array($this->url_controller, $this->url_action), $this->url_params);
                     }
-                    catch (ArgumentCountError $x) {
+                    else {
                         $this->problem(400);
                     }
                 } else {
