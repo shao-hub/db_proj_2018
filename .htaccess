@@ -12,9 +12,6 @@ Options -Indexes
 # If your app is in the root of your web folder, then leave it commented out
 RewriteBase /db_proj_2018/
 
-# remove trailing slash and "index" from url
-RewriteRule ^/?(.*)/(index)?$   $1   [R,L]
-
 # General rewrite rules
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -29,7 +26,7 @@ RewriteRule ^/?_install index.php?url=problem
 
 # hide sensitive or unrelated files
 RewriteRule ^/?Dockerfile index.php?url=problem
-RewriteRule ^(/?|.+/)\.ht.* index.php?url=problem [R=403]
+RewriteRule ^(/?|.+/)\.ht.* index.php?url=problem
 
 # make error page more nice looking
 ErrorDocument 403 /db_proj_2018/index.php?url=problem

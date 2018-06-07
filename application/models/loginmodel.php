@@ -25,12 +25,11 @@ class LoginModel
         if(is_array($result) && password_verify($password,$result['password']))
         {
             Auth::setSession($result['id'],$result['name'],$result['is_admin']);
-            echo $result['id'].$result['name'].$result['is_admin'];
+            return true;
         }
         else
         {
-            echo "login failed";
-            echo $result['id'].$result['name'].$result['is_admin'];
+            return false;
         }
     }
 

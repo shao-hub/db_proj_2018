@@ -40,7 +40,7 @@ class Anncs extends Controller
         if(!Auth::isAdmin())
         {
             header('location: ' . URL . 'anncs/index');
-            return;
+            exit();
         }
 
         // if we have POST data to create a new song entry
@@ -49,6 +49,7 @@ class Anncs extends Controller
             $anncs_model=$this->loadModel('AnncsModel');
             $anncs_model->addAnnc($_POST["title"], $_POST["date"],  $_POST["description"]);
             header('location: ' . URL . 'anncs/index');
+            exit();
         }
 
         require 'application/views/_templates/header.php';

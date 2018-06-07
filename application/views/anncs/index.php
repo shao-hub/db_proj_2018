@@ -33,7 +33,7 @@
                         if(Auth::isAdmin())
                         {
                             ?>
-                            <td><a class="button red" href="<?php echo URL . 'anncs/delete/' . $annc->id; ?>">x</a></td>
+                            <td><a class="button red delete_confirm" href="<?php echo URL . 'anncs/delete/' . $annc->id; ?>">x</a></td>
                     <?php
                         }
                     ?>
