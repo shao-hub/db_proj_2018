@@ -11,21 +11,30 @@ class Login extends Controller
         require 'application/views/_templates/footer.php';
     }
 
+    private function redirectToHome()
+    {
+        header('location: ' . URL . 'anncs/index');
+        exit();
+    }
+
+
 
     public function loginAccount()
     {
         if (isset($_POST["submit_login_account"])) {
             $login_model=$this->loadModel('LoginModel');
-            $login_model->verifyAccount($_POST["user_id"], $_POST["user_pw"]);
-            header('location: ' . URL . 'anncs/index');
+            if($login_model->verifyAccount($_POST["user_id"], $_POST["user_pw"]))
+                Msg::SetMsg("Login success");
+            else
+                Msg::SetMsg("Login failed");
+            $this->redirectToHome();
         }
     }
 
     public function logoutAccount()
     {
         Auth::logout();
-        header('location: ' . URL . 'anncs/index');
-
+        $this->redirectToHome();
     }
 
 }
