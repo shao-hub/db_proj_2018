@@ -45,10 +45,12 @@ class Application
                     }
                 } else {
                     // If no parameters are given, just call the method without parameters, like $this->home->method();
-                    try {
-                    $this->url_controller->{$this->url_action}();
+                    $method = new ReflectionMethod($this->url_controller, $this->url_action);
+                    $num_of_params = $method->getNumberOfRequiredParameters();
+                    if ($num_of_params == 0) {
+                        $this->url_controller->{$this->url_action}();
                     }
-                    catch (ArgumentCountError $x) {
+                    else {
                         $this->problem(400);
                     }
                 }
