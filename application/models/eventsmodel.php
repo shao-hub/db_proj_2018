@@ -55,7 +55,7 @@ class EventsModel
 
     public function getAllTeamMembers($team_id)
     {
-        $sql = "SELECT * FROM team_members ,account Where team_id=:team_id and user_id=id";
+        $sql = "SELECT account.id id,account.name name FROM team_members ,account Where team_id=:team_id and user_id=account.id";
         $query = $this->db->prepare($sql);
         $query->execute(array(':team_id' => $team_id));
 

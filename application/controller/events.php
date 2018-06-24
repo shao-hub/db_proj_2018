@@ -145,7 +145,7 @@ class Events extends Controller
             $obj=new stdClass();
             $register_model=$this->loadModel('RegisterModel');
             $result=$register_model->findAccount($_POST["id"]);
-            if($result)
+            if(!empty($result))
             {
                 $obj->valid="true";
                 $obj->name=$result->name;
@@ -174,6 +174,43 @@ class Events extends Controller
         require 'application/views/_templates/footer.php';
     }
 
+    public function get_team_info()
+    {
+        if(!Auth::isLogin())
+        {
+            $this->redirectToHome();
+        }
+        if(isset($_POST["json"]))
+        {
+            $events_model = $this->loadModel('EventsModel');
+            $obj = json_decode($_POST["json"], false);
+            $team_list=$events_model->getUserJoinTeams(Auth::getUserId(),$obj->event_id);
+            $resp_obj=new stdClass();
+            $resp_obj->team_members=array();
+            if(Auth::isAdmin())
+            {
+                $resp_obj->team_name="New Team";
+            }
+            else if(empty($team_list))
+            {
+                $resp_obj->team_name="New Team";
+                array_push($resp_obj->team_members, array("id" => Auth::getUserId(), "name" => Auth::getUserName()));
+            }
+            else
+            {
+                $team=$team_list[0];
+                $resp_obj->team_name=$team->name;
+                $members=$events_model->getAllTeamMembers($team->id);
+                foreach ($members as $member) {
+                    array_push($resp_obj->team_members, array("id" => $member->id, "name" => $member->name));
+                }
+            }
+            $JSON_resp=json_encode($resp_obj);
+            echo $JSON_resp;
+        }
+
+    }
+
     public function signup_team()
     {
         if(!Auth::isLogin())
@@ -184,13 +221,45 @@ class Events extends Controller
         {
             $events_model = $this->loadModel('EventsModel');
             $obj = json_decode($_POST["json"], false);
+            if(!Auth::isAdmin()&&!in_array(Auth::getUserId(),$obj->team_members))
+            {
+                echo submit_resp::invalid("You must include yourself as team member.");
+                exit();
+            }
+            if(!Auth::isAdmin())
+            {
+                $team_list=$events_model->getUserJoinTeams(Auth::getUserId(),$obj->event_id);
+                $team_id;
+                if(empty($team_list))
+                {
+                    $team_id=-1;
+                }
+                else
+                {
+                    $team=$team_list[0];
+                    $team_id=$team->id;
+                }
+
+                foreach($obj->team_members as $member_id)
+                {
+                    $member_team_list=$events_model->getUserJoinTeams($member_id,$obj->event_id);
+                    foreach($member_team_list as $member_team)
+                    {
+                        if($member_team->id!=$team_id)
+                        {
+                            echo submit_resp::invalid($member_id." has already joined another team.");
+                            exit();
+                        }
+                    }
+                }
+                if($team_id!=-1)
+                {
+                    $events_model->deleteTeam($team_id,$obj->event_id);
+                }
+            }
+
             $events_model->addTeam($obj->team_name,$obj->event_id,$obj->team_members);
+            echo submit_resp::valid("");
         }
-
-        $obj=new stdClass();
-        $obj->valid="true";
-        $JSON=json_encode($obj);
-        echo $JSON;
-
     }
 }

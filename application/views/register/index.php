@@ -3,8 +3,8 @@
     <!-- main content output -->
     <div>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-        <script src="<?php echo URL; ?>/public/js/register/password_confirm.js"  defer></script>
-        <script src="<?php echo URL; ?>/public/js/register/check_user_id.js"  defer></script>
+        <script src="<?php echo URL; ?>public/js/register/password_confirm.js"  defer></script>
+        <script src="<?php echo URL; ?>public/js/register/check_user_id.js"  defer></script>
         <form action="<?php echo URL; ?>register/signup" method="POST">
             <label>ID</label>
             <input type="text" id="user_id" name="user_id" value="" required>
@@ -22,5 +22,6 @@
             <input type="submit" id="submit_signup_account" name="submit_signup_account" value="Submit" />
             <input type="reset">
         </form>
+        <button onclick='location.href="<?php echo URL; ?>";'>Cancel</button>
     </div>
 </div>
