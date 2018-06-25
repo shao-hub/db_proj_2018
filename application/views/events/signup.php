@@ -1,3 +1,4 @@
+<script src="<?php echo URL; ?>public/js/preventleave.js"></script>
 <section>
 <h1>活動報名</h1>
  <form>
@@ -11,12 +12,12 @@
 
  <script src="<?php echo URL.'public/js/events/signup_players.js'; ?>"  defer></script>
 
- <form>
+ <form onsubmit="add_player(); return false;">
      <label>ID</label>
      <input type="text" id="new_player_id" name="id" value="" required>
  </form>
- <span id="error_msg"></span><br>
- <button id="add_new_player">Add New Player</button><br>
- <button id="submit_team">Submit Team</button>
- <button onclick='location.href="<?php echo URL; ?>events";'>Cancel</button>
+     <button id="add_new_player">新增隊員</button><br>
+     <span id="error_msg"></span><br>
+     <button type="button" id="submit_team">提交報名表</button>
+     <button class="delete_confirm" href="<?php echo URL.'events/delete_signup/'.$event_info->id;?>">刪除報名表</button>
 </section>
