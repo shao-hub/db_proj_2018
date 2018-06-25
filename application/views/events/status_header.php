@@ -4,7 +4,7 @@
     <div>
         <?php
         if (isset($event->name))
-            echo '<h2>'.$event->name.'</h2>';
+            echo '<h2>'.htmlspecialchars($event->name).'</h2>';
         ?>
         <?php if (count($teams) == 0) { ?>
             <p>尚無人報名</p>

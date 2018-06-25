@@ -27,7 +27,7 @@
             <tbody>
             <?php foreach ($events as $event) { ?>
                 <tr>
-                    <td><?php if (isset($event->name)) echo $event->name; ?></td>
+                    <td><?php if (isset($event->name)) echo htmlspecialchars($event->name); ?></td>
                     <td><?php if (isset($event->date)) echo $event->date; ?></td>
                     <?php if (Auth::isLogin()) echo '<td style="text-align:center;"><a class="button cyan" href="'.URL.'events/signup/' . $event->id . '">報名</a></td>' ; ?>
                     <?php

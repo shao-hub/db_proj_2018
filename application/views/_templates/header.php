@@ -44,7 +44,7 @@
             }
                 ?>
 
-            <li><?php echo Auth::getUserName() ?></li>
+            <li><?php echo htmlspecialchars(Auth::getUserName()) ?></li>
             <li><a href="<?php echo URL; ?>login/logoutAccount">登出</a></li>
                     <?php
                 }

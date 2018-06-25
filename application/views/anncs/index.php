@@ -24,10 +24,10 @@
                 <tr>
                     <td class="date"><?php
                         if (isset($annc->date))
-                            echo preg_replace('/^(\d+)-(\d+)-(\d+).*/', "$1 / $2 / $3", $annc->date, 1);
+                            echo $annc->date;
                     ?></td>
                     <td>
-                        <a class="cyan-text no-underline" href="<?php echo URL . 'anncs/getDetail/' . $annc->id; ?>"><?php if (isset($annc->title)) echo $annc->title; ?></a>
+                        <a class="cyan-text no-underline" href="<?php echo URL . 'anncs/getDetail/' . $annc->id; ?>"><?php if (isset($annc->title)) echo htmlspecialchars($annc->title); ?></a>
                     </td>
                     <?php
                         if(Auth::isAdmin())
