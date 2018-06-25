@@ -81,7 +81,7 @@ class Events extends Controller
         $this->redirectToHome();
     }
 
-    public function status()
+    public function status($event_id = 'all')
     {
         if(!Auth::isAdmin())
             $this->redirectToHome();
@@ -89,14 +89,21 @@ class Events extends Controller
         require 'application/views/_templates/header.php';
 
         $events_model = $this->loadModel('EventsModel');
-        $events = $events_model->getAllEvents();
-
+        if ($event_id == 'all') {
+            $events = $events_model->getAllEvents();
+        }
+        else {
+            $events = [$events_model->getEvent($event_id)];
+        }
         foreach($events as $event)
         {
-
+            // to prevent error
+            if (!ISSET($event->id)) {
+                $event = (object) ['id' => $event_id];
+            }
+            $teams=$events_model->getAllTeams($event->id);
             require 'application/views/events/status_header.php';
 
-            $teams=$events_model->getAllTeams($event->id);
             foreach($teams as $team)
             {
 

@@ -11,7 +11,9 @@
                     if (isset($member->id)) echo $member->id.'&ensp;';
                     if (isset($member->name)) echo $member->name.'<br>';
                 }
+                if (count($members) == 0) {
+                    echo '無成員';
+                }
                 ?>
     </td>
 </tr>
-
