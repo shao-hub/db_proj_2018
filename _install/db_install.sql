@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.31-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
 --
 -- Host: localhost    Database: db_proj_2018
 -- ------------------------------------------------------
--- Server version	10.1.31-MariaDB
+-- Server version	5.7.22-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `account` (
-  `id` varchar(45) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `name` varchar(45) NOT NULL,
-  `email` varchar(127) NOT NULL,
+  `id` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `name` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `email` varchar(127) CHARACTER SET utf8 NOT NULL,
   `is_admin` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -51,9 +51,9 @@ DROP TABLE IF EXISTS `anncs`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `anncs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8 NOT NULL,
   `date` date NOT NULL,
-  `description` varchar(2048) DEFAULT NULL,
+  `description` varchar(2048) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -77,7 +77,7 @@ DROP TABLE IF EXISTS `events`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `date` date NOT NULL,
   `team_limit` int(11) NOT NULL,
   `team_size_limit` int(11) NOT NULL,
@@ -105,7 +105,7 @@ DROP TABLE IF EXISTS `team_members`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `team_members` (
   `team_id` int(11) NOT NULL,
-  `user_id` varchar(45) NOT NULL,
+  `user_id` varchar(45) CHARACTER SET utf8 NOT NULL,
   KEY `fk_team_members_account_idx` (`user_id`),
   KEY `fk_team_members_teams_idx` (`team_id`),
   CONSTRAINT `fk_team_members_account` FOREIGN KEY (`user_id`) REFERENCES `account` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -132,7 +132,7 @@ DROP TABLE IF EXISTS `teams`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teams` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `event_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_teams_events_idx` (`event_id`),
