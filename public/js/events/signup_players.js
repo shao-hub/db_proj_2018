@@ -68,6 +68,8 @@ var player_list=
 
     }
 
+get_team_info();
+
 function add_player()
 {
     if(new_player_id.value !== null)
@@ -131,9 +133,34 @@ function submit_team()
             }
             else
             {
-                error_msg.textContent="Something goes wrong...";
+                error_msg.textContent=Resp.msg;
             }
 
+        }
+    };
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("json="+str);
+}
+
+function get_team_info()
+{
+    var obj=
+        {
+            event_id:document.getElementById("event_id").value,
+        };
+    var str=encodeURIComponent(JSON.stringify(obj));
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", Globals.URL+"events/get_team_info", true);
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            var Resp = JSON.parse(this.responseText);
+            document.getElementById("team_name").value=Resp.team_name;
+            for(var i=0;i<Resp.team_members.length;i++)
+            {
+                player_list.player_arr.push({id:Resp.team_members[i].id, name:Resp.team_members[i].name});
+            }
+            player_list.draw_all_players();
         }
     };
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

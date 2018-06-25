@@ -3,6 +3,7 @@ document.getElementById("submit_signup_account").disable=true;
 
 function check_id()
 {
+
     var input_id=document.getElementById("user_id");
     var submit=document.getElementById("submit_signup_account");
 
@@ -21,6 +22,7 @@ function check_id()
                 }
                 else
                     document.getElementById("user_id_msg").textContent = "User ID already exists";
+
                 submit.disable=true;
             }
         };

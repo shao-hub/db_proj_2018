@@ -17,6 +17,7 @@ class Application
 
         require_once APP.'utils/auth.php';
         require_once APP.'utils/msg.php';
+        require_once APP.'utils/submit_resp.php';
 
         // create array with URL parts in $url
         $this->splitUrl();
