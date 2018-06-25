@@ -17,6 +17,7 @@ class Application
 
         require_once APP.'utils/auth.php';
         require_once APP.'utils/msg.php';
+        require_once APP.'utils/submit_resp.php';
 
         // create array with URL parts in $url
         $this->splitUrl();
@@ -35,18 +36,22 @@ class Application
             if (method_exists($this->url_controller, $this->url_action)) {
                 if (!empty($this->url_params)) {
                     // Call the method and pass arguments to it
-                    try {
-                    call_user_func_array(array($this->url_controller, $this->url_action), $this->url_params);
+                    $method = new ReflectionMethod($this->url_controller, $this->url_action);
+                    $num_of_params = $method->getNumberOfRequiredParameters();
+                    if (count($this->url_params) >= $num_of_params) {
+                        call_user_func_array(array($this->url_controller, $this->url_action), $this->url_params);
                     }
-                    catch (ArgumentCountError $x) {
+                    else {
                         $this->problem(400);
                     }
                 } else {
                     // If no parameters are given, just call the method without parameters, like $this->home->method();
-                    try {
-                    $this->url_controller->{$this->url_action}();
+                    $method = new ReflectionMethod($this->url_controller, $this->url_action);
+                    $num_of_params = $method->getNumberOfRequiredParameters();
+                    if ($num_of_params == 0) {
+                        $this->url_controller->{$this->url_action}();
                     }
-                    catch (ArgumentCountError $x) {
+                    else {
                         $this->problem(400);
                     }
                 }

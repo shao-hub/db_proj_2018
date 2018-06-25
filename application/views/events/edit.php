@@ -14,5 +14,6 @@
             <input type="submit" name="submit_edit_event" value="Submit" />
             <input type="reset">
         </form>
+        <button onclick='location.href="<?php echo URL; ?>events";'>Cancel</button>
     </div>
 </div>

@@ -10,5 +10,6 @@
             <input type="submit" name="submit_login_account" value="Submit" />
             <input type="reset">
         </form>
+        <button onclick='location.href="<?php echo URL; ?>events";'>Cancel</button>
     </div>
 </div>

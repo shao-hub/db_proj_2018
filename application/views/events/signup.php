@@ -17,4 +17,5 @@
  </form>
  <span id="error_msg"></span><br>
  <button id="add_new_player">Add New Player</button><br>
- <button id="submit_team">Submit Team</button><br>
+ <button id="submit_team">Submit Team</button>
+ <button onclick='location.href="<?php echo URL; ?>events";'>Cancel</button>
