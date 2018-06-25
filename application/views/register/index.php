@@ -1,5 +1,5 @@
-<div class="container">
-    <h2>You are in the View: application/views/register/index.php (everything in this box comes from that file)</h2>
+<section>
+    <h1>註冊</h1>
     <!-- main content output -->
     <div>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -24,4 +24,4 @@
         </form>
         <button onclick='location.href="<?php echo URL; ?>";'>Cancel</button>
     </div>
-</div>
+</section>

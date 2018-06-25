@@ -62,11 +62,14 @@
         <span class="split-right"></span>
     </nav>
 </div>
+<div class='content'>
 <?php
     if (Msg::ChkMsgExist())
     {
         ?>
-        <h6><?php echo Msg::GetandClrMsg() ?></h6>
+    <section>
+        <p><?php echo Msg::GetandClrMsg() ?></p>
+    </section>
 <?php
     }
     ?>

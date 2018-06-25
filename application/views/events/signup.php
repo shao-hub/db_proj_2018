@@ -1,5 +1,5 @@
-
-
+<section>
+<h1>活動報名</h1>
  <form>
      <label>Team Name</label>
      <input type="text" id="team_name" name="name" value="" required><br>
@@ -19,3 +19,4 @@
  <button id="add_new_player">Add New Player</button><br>
  <button id="submit_team">Submit Team</button>
  <button onclick='location.href="<?php echo URL; ?>events";'>Cancel</button>
+</section>

@@ -1,4 +1,4 @@
-<div class="content"><section>
+<section>
     <h1>最新公告</h1>
     <!-- main content output -->
     <div>
@@ -43,4 +43,4 @@
         </table>
 
     </div>
-</section></div>
+</section>

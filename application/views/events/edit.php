@@ -1,5 +1,5 @@
-<div class="container">
-    <h2>You are in the View: application/views/events/add.php (everything in this box comes from that file)</h2>
+<section>
+    <h1>修改活動</h1>
     <!-- main content output -->
     <div>
         <form action="<?php echo URL.'events/edit/'.$event_id; ?>" id="edit_event_form" method="POST">
@@ -16,4 +16,4 @@
         </form>
         <button onclick='location.href="<?php echo URL; ?>events";'>Cancel</button>
     </div>
-</div>
+</section>

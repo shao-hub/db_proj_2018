@@ -1,5 +1,5 @@
-<div class="container">
-    <h2>You are in the View: application/views/events/index.php (everything in this box comes from that file)</h2>
+<section>
+    <h1>活動列表</h1>
     <!-- main content output -->
     <div>
         <?php
@@ -41,4 +41,4 @@
         </table>
 
     </div>
-</div>
+</section>

@@ -1,5 +1,5 @@
-<div class="container">
-    <h2>You are in the View: application/views/register/index.php (everything in this box comes from that file)</h2>
+<section>
+    <h1>登入</h1>
     <!-- main content output -->
     <div>
         <form action="<?php echo URL; ?>login/loginAccount" method="POST">
@@ -12,4 +12,5 @@
         </form>
         <button onclick='location.href="<?php echo URL; ?>events";'>Cancel</button>
     </div>
-</div>
+    <p>沒有帳號？請<a href="<?= URL ?>register">註冊</a></p>
+</section>

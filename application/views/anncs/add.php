@@ -1,4 +1,4 @@
-<div class="content"><section>
+<section>
     <div>
         <h1>新增公告</h1>
         <form action="<?php echo URL; ?>anncs/add" id="add_anncs_form" method="POST">
@@ -13,4 +13,4 @@
         <textarea name="description" form="add_anncs_form"></textarea>
 
     </div>
-</section></div>
+</section>
