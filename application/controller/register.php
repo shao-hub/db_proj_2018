@@ -25,11 +25,23 @@ class Register extends Controller
             $register_model=$this->loadModel('RegisterModel');
             if($register_model->verifyReCaptcha($_POST['g-recaptcha-response'])==false)
             {
-                $this->redirectToHome();
+                $this->redirectToHome("CAPTCHA required");
+                return;
+            }
+            if (!$register_model->isValidId($_POST["user_id"])) {
+                $this->redirectToHome("Invalid user ID");
+                return;
+            }
+            if ($register_model->findAccount($_POST["user_id"])!=FALSE) {
+                $this->redirectToHome("User ID already exists");
+                return;
+            }
+            if (strpos($_POST["user_email"], '@') === FALSE) {
+                $this->redirectToHome("Invalid email");
                 return;
             }
             $register_model->addAccount($_POST["user_id"], $_POST["user_pw"],$_POST["user_name"],$_POST["user_email"] );
-            $this->redirectToHome();
+            $this->redirectToHome("Registration success!");
         }
     }
 
@@ -41,7 +53,10 @@ class Register extends Controller
             $obj=new stdClass();
             $obj->valid="false";
             $register_model=$this->loadModel('RegisterModel');
-            if($register_model->findAccount($_POST["id"])==false)
+            if(!$register_model->isValidId($_POST["id"])) {
+                $obj->valid="invalid";
+            }
+            else if($register_model->findAccount($_POST["id"])==false)
             {
                 $obj->valid="true";
             }
@@ -50,8 +65,11 @@ class Register extends Controller
         }
     }
 
-    private function redirectToHome()
+    private function redirectToHome($message = "")
     {
+        if ($message !== "") {
+            Msg::SetMsg($message);
+        }
         header('location: ' . URL . 'anncs/index');
         exit();
     }

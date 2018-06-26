@@ -59,4 +59,11 @@ class RegisterModel
             return FALSE;
     }
 
+    // check if a user id is valid
+    public function isValidId($id) {
+        // In NCTU, student id is 7 digits
+        if (strlen($id) != 7) return FALSE;
+        if (!ctype_digit($id)) return FALSE;
+        return TRUE;
+    }
 }

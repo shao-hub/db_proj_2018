@@ -7,10 +7,8 @@
             <input type="text" name="user_id" value="" required><br>
             <lable>Password</lable>
             <input type="password" name="user_pw" value="" required><br>
-            <input type="submit" name="submit_login_account" value="Submit" />
-            <input type="reset">
+            <input type="submit" name="submit_login_account" value="登入" />
         </form>
-        <button onclick='location.href="<?php echo URL; ?>events";'>Cancel</button>
     </div>
     <p>沒有帳號？請<a href="<?= URL ?>register">註冊</a></p>
 </section>
