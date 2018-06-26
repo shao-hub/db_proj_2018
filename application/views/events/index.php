@@ -1,6 +1,7 @@
 <section>
     <h1>活動列表</h1>
     <!-- main content output -->
+    <?php if (!Auth::isLogin()) { ?><p>報名之前請先<a href="<?=URL?>login">登入</a></p><?php } ?>
     <div>
         <?php
         if(Auth::isAdmin())

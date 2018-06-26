@@ -60,7 +60,9 @@ class Events extends Controller
             $events_model->editEvent($event_id,$_POST["name"], $_POST["date"],  $_POST["team_limit"],$_POST["team_size_limit"]);
             $this->redirectToHome();
         }
-
+        
+        $events_model=$this->loadModel('EventsModel');
+        $event=$events_model->getEvent($event_id);
         require 'application/views/_templates/header.php';
         require 'application/views/events/edit.php';
         require 'application/views/_templates/footer.php';

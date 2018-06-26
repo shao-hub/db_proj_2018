@@ -124,6 +124,16 @@ td.date {
   text-align: center;
 }
 
+input.wide, textarea.wide {
+  box-sizing:border-box;
+  width:100%;
+  padding: 3px 7px;
+}
+
+textarea {
+  height: 8em;
+}
+
 /*
  * Most of these change-page CSS's come from Bootstrap pagination component
  * (I just imitate Bootstrap)
@@ -185,6 +195,7 @@ td.date {
 .button {
   color: white;
   text-decoration: none;
+  border: none;
   border-radius: 4px;
   padding: 5px 8px;
   margin: 5px 3px;
@@ -217,6 +228,9 @@ td.date {
 }
 .button.cyan:focus {
   background-color: #448888;
+}
+.button.cyan:disabled{
+  background-color: gray;
 }
 .button.green {
   background-color: #77bb66;

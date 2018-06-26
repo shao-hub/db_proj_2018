@@ -5,7 +5,6 @@
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <script src="<?php echo URL; ?>public/js/register/password_confirm.js"  defer></script>
         <script src="<?php echo URL; ?>public/js/register/check_user_id.js"  defer></script>
-        <script src="<?php echo URL; ?>public/js/register/register_check.js"  defer></script>
         <form action="<?php echo URL; ?>register/signup" method="POST">
             <label>ID</label>
             <input type="text" id="user_id" name="user_id" value="" required>
@@ -19,9 +18,13 @@
             <label>Confirm Password</label>
             <input type="password" id="user_pw_conf" name="user_pw_conf" value="" required>
             <span id="user_pw_msg"></span><br>
-            <div class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_SITEKEY?>"></div><br>
-            <input type="submit" id="submit_signup_account" name="submit_signup_account" value="確定" onclick="return registerCheck()"/>
-            <button style="float:right;" onclick='location.href="<?php echo URL; ?>";'>取消</button>
+            <p><div class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_SITEKEY?>"></div><br></p>
+            <p>
+              <button type="submit" id="submit_signup_account"
+                name="submit_signup_account" class="button cyan"
+                onclick="return registerCheck()">註冊</button>
+              <button class="button red" onclick='location.href="<?php echo URL; ?>";'>取消</button>
+            </p>
         </form>
     </div>
 </section>
