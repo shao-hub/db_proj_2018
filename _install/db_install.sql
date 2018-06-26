@@ -38,7 +38,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES ('0400000','$2y$10$0KJKD8.f/fIa7rt/PnnsYO5UskokLwIDTSofOlAZFMib2C/KkKlsO','ZERO','',NULL),('0400001','$2y$10$ABoCGSqgEDMZeom9FEvJb.2xJ3gm30kiyXADBqy1YI/6zuKUlyYuO','ONE','',NULL),('0400002','$2y$10$WyEXzAT8Upzkt2BSlE72fe8z7plJnKPw7rLarIWthpl/iMdChUDZy','äºŒè™Ÿ','',NULL),('777','$2y$10$tmr4IEGQYLSG405g6MpweeNVhDCYFO4ajkhWPfZNi2IRLXXOA7yfW','root','',1);
+INSERT INTO `account` VALUES ('0400000','$2y$10$0KJKD8.f/fIa7rt/PnnsYO5UskokLwIDTSofOlAZFMib2C/KkKlsO','ZERO','',NULL),('0400001','$2y$10$ABoCGSqgEDMZeom9FEvJb.2xJ3gm30kiyXADBqy1YI/6zuKUlyYuO','ONE','',NULL),('0400002','$2y$10$WyEXzAT8Upzkt2BSlE72fe8z7plJnKPw7rLarIWthpl/iMdChUDZy','二號','',NULL),('777','$2y$10$tmr4IEGQYLSG405g6MpweeNVhDCYFO4ajkhWPfZNi2IRLXXOA7yfW','root','',1);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,6 +81,7 @@ CREATE TABLE `events` (
   `date` date NOT NULL,
   `team_limit` int(11) NOT NULL,
   `team_size_limit` int(11) NOT NULL,
+  `description` varchar(2048) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -91,7 +92,7 @@ CREATE TABLE `events` (
 
 LOCK TABLES `events` WRITE;
 /*!40000 ALTER TABLE `events` DISABLE KEYS */;
-INSERT INTO `events` VALUES (6,'baseball','2018-05-10',3,20);
+INSERT INTO `events` VALUES (6,'baseball','2018-05-10',3,20,'棒球好好玩');
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +146,7 @@ CREATE TABLE `teams` (
 
 LOCK TABLES `teams` WRITE;
 /*!40000 ALTER TABLE `teams` DISABLE KEYS */;
-INSERT INTO `teams` VALUES (3,'IAmTeam3',6),(4,'IAmTeam4',6),(5,'Super Team',6),(9,'asdasdasd',6),(11,'ddd',6),(13,'gergerge',6),(14,'testing vvv',6),(17,'asdasdasd',6),(18,'asdasdasd',6),(19,'asdasdasdddd',6),(20,'asdasdas',6);
+INSERT INTO `teams` VALUES (3,'IAmTeam3',6),(9,'asdasdasd',6),(20,'asdasdas',6);
 /*!40000 ALTER TABLE `teams` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -158,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-06 11:29:43
+-- Dump completed on 2018-06-25 14:38:21

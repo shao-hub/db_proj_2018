@@ -60,7 +60,9 @@ class Events extends Controller
             $events_model->editEvent($event_id,$_POST["name"], $_POST["date"],  $_POST["team_limit"],$_POST["team_size_limit"]);
             $this->redirectToHome();
         }
-
+        
+        $events_model=$this->loadModel('EventsModel');
+        $event=$events_model->getEvent($event_id);
         require 'application/views/_templates/header.php';
         require 'application/views/events/edit.php';
         require 'application/views/_templates/footer.php';
@@ -81,7 +83,7 @@ class Events extends Controller
         $this->redirectToHome();
     }
 
-    public function status()
+    public function status($event_id = 'all')
     {
         if(!Auth::isAdmin())
             $this->redirectToHome();
@@ -89,14 +91,21 @@ class Events extends Controller
         require 'application/views/_templates/header.php';
 
         $events_model = $this->loadModel('EventsModel');
-        $events = $events_model->getAllEvents();
-
+        if ($event_id == 'all') {
+            $events = $events_model->getAllEvents();
+        }
+        else {
+            $events = [$events_model->getEvent($event_id)];
+        }
         foreach($events as $event)
         {
-
+            // to prevent error
+            if (!ISSET($event->id)) {
+                $event = (object) ['id' => $event_id];
+            }
+            $teams=$events_model->getAllTeams($event->id);
             require 'application/views/events/status_header.php';
 
-            $teams=$events_model->getAllTeams($event->id);
             foreach($teams as $team)
             {
 
@@ -205,6 +214,7 @@ class Events extends Controller
                     array_push($resp_obj->team_members, array("id" => $member->id, "name" => $member->name));
                 }
             }
+            $resp_obj->myself = Auth::getUserId();
             $JSON_resp=json_encode($resp_obj);
             echo $JSON_resp;
         }
@@ -224,6 +234,10 @@ class Events extends Controller
             if(!Auth::isAdmin()&&!in_array(Auth::getUserId(),$obj->team_members))
             {
                 echo submit_resp::invalid("You must include yourself as team member.");
+                exit();
+            }
+            if (count($obj->team_members) == 0) {
+                echo submit_resp::invalid("A team must have at least 1 member.");
                 exit();
             }
             if(!Auth::isAdmin())
@@ -259,6 +273,58 @@ class Events extends Controller
             }
 
             $events_model->addTeam($obj->team_name,$obj->event_id,$obj->team_members);
+            echo submit_resp::valid("");
+        }
+    }
+    
+    public function leave_team() {
+        if(!Auth::isLogin())
+        {
+            $this->redirectToHome();
+        }
+        if(isset($_POST["json"]))
+        {
+            $events_model = $this->loadModel('EventsModel');
+            $obj = json_decode($_POST["json"], false);
+
+            if(true)
+            {
+                $team_list=$events_model->getUserJoinTeams(Auth::getUserId(),$obj->event_id);
+                $team_id;
+                if(empty($team_list))
+                {
+                    $team_id=-1;
+                }
+                else
+                {
+                    $team=$team_list[0];
+                    $team_id=$team->id;
+                }
+                $members=$events_model->getAllTeamMembers($team_id);
+                if (count($members) <= 1) {
+                    echo submit_resp::invalid("A team must have at least 1 member.");
+                    exit();
+                }
+                $me = Auth::getUserId();
+                $team_members = [];
+                foreach($members as $member)
+                {
+                    $member_id = $member->id;
+                    if ($member_id !== $me) {
+                        array_push($team_members, $member_id);
+                    }
+                }
+                if($team_id!=-1)
+                {
+                    $events_model->deleteTeam($team_id,$obj->event_id);
+                }
+                else {
+                    echo submit_resp::invalid("Cannot leave the team because the team does not exist");
+                    exit();
+                }
+            }
+
+            $events_model->addTeam($team->name,$obj->event_id,$team_members);
             echo submit_resp::valid("");
         }
     }

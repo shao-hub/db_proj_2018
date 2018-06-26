@@ -44,7 +44,7 @@
             }
                 ?>
 
-            <li><?php echo Auth::getUserName() ?></li>
+            <li><?php echo htmlspecialchars(Auth::getUserName()) ?></li>
             <li><a href="<?php echo URL; ?>login/logoutAccount">登出</a></li>
                     <?php
                 }
@@ -62,11 +62,14 @@
         <span class="split-right"></span>
     </nav>
 </div>
+<div class='content'>
 <?php
     if (Msg::ChkMsgExist())
     {
         ?>
-        <h6><?php echo Msg::GetandClrMsg() ?></h6>
+    <section>
+        <p><?php echo Msg::GetandClrMsg() ?></p>
+    </section>
 <?php
     }
     ?>

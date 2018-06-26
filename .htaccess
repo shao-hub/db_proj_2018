@@ -7,7 +7,6 @@ RewriteEngine On
 
 # Disallows others to look directly into /public/ folder
 Options -Indexes
-DirectorySlash Off 
 
 # When using the script within a sub-folder, put this path here, like /mysubfolder/
 # If your app is in the root of your web folder, then leave it commented out
@@ -19,12 +18,21 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-l
 
 RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+
+# hide sensitive or unrelated folders
 RewriteRule ^/?application.* index.php?url=problem
 RewriteRule ^/?\.git.* index.php?url=problem
 RewriteRule ^/?_install index.php?url=problem
 
+# hide sensitive or unrelated files
 RewriteRule ^/?Dockerfile index.php?url=problem
 RewriteRule ^(/?|.+/)\.ht.* index.php?url=problem
 
+# make error page more nice looking
 ErrorDocument 403 /db_proj_2018/index.php?url=problem
 ErrorDocument 500 /db_proj_2018/index.php?url=problem
+
+# don't add trailing slash to url
+<FilesMatch "^(?!db_proj_2018)">
+  DirectorySlash off
+</FilesMatch>

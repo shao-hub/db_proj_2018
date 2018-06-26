@@ -1,16 +1,20 @@
-<div class="container">
-    <h2>You are in the View: application/views/events/status_header.php (everything in this box comes from that file)</h2>
+<section>
+    <h1>報名狀況</h1>
     <!-- main content output -->
     <div>
         <?php
         if (isset($event->name))
-            echo '<h2>'.$event->name.'</h2>';
+            echo '<h2>'.htmlspecialchars($event->name).'</h2>';
         ?>
+        <?php if (count($teams) == 0) { ?>
+            <p>尚無人報名</p>
+        <?php } else { ?>
         <table>
             <thead style="background-color: #ddd; font-weight: bold;">
             <tr>
-                <td>Team Name</td>
-                <td>Team Members</td>
+                <td>隊伍名稱</td>
+                <td>隊伍成員</td>
             </tr>
             </thead>
             <tbody>
+        <?php } ?>

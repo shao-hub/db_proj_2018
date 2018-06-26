@@ -72,14 +72,19 @@ section {
   border-width: 1px;
   border-style: solid;
   border-radius: 0.7em;
-  padding: 0 0.7em;
+  padding: 0.7em;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
 
+section h1:first-child, section h2:first-child {
+  margin-top: 0.3em;
+}
+
 .cyan-bg {
   background-color: #559999;
+  color: white;
 }
 
 .cyan-text {
@@ -87,8 +92,14 @@ section {
 }
 
 table {
+  table-layout: fixed;
   border-collapse: collapse;
   width: 100%;
+}
+
+thead {
+  font-weight: bold;
+  text-align: center;
 }
 
 table tr {
@@ -97,10 +108,12 @@ table tr {
 
 table td {
   padding: 10px 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 td.date {
-  width:150px;
+  width:100px;
 }
 
 .no-underline {
@@ -109,6 +122,16 @@ td.date {
 
 .text-center {
   text-align: center;
+}
+
+input.wide, textarea.wide {
+  box-sizing:border-box;
+  width:100%;
+  padding: 3px 7px;
+}
+
+textarea {
+  height: 8em;
 }
 
 /*
@@ -167,4 +190,54 @@ td.date {
 }
 .change-page > .selected > a:focus {
   background-color: #448888;
+}
+
+.button {
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 8px;
+  margin: 5px 3px;
+  background-color: gray;
+  font-size: 90%;
+}
+.button.blue {
+  background-color: #5588cc;
+}
+.button.blue:hover {
+  background-color: #6699dd;
+}
+.button.blue:focus {
+  background-color: #4477bb;
+}
+.button.red {
+  background-color: #dd7777;
+}
+.button.red:hover {
+  background-color: #ee8888;
+}
+.button.red:focus {
+  background-color: #cc6666;
+}
+.button.cyan {
+  background-color: #559999;
+}
+.button.cyan:hover {
+  background-color: #66aaaa;
+}
+.button.cyan:focus {
+  background-color: #448888;
+}
+.button.cyan:disabled{
+  background-color: gray;
+}
+.button.green {
+  background-color: #77bb66;
+}
+.button.green:hover {
+  background-color: #88cc77;
+}
+.button.green:focus {
+  background-color: #66aa55;
 }
