@@ -1,19 +1,26 @@
-FROM alpine:latest
+FROM ubuntu:16.04
 
-RUN apk update && apk add --no-cache \
-    curl                             \
-    php7 php7-intl php7-openssl php7-dba php7-common php7-oauth php7-fpm php7-fileinfo php7-json php7-iconv php7-curl php7-phar php7-ssh2 php7-gd php7-zlib php7-opcache php7-pdo php7-pdo_dblib php7-pdo_mysql php7-pdo_odbc php7-phpdbg
+ENV HOST=":80 :443"
 
-RUN curl -o caddy.tar.gz https://caddyserver.com/download/linux/amd64?license=personal ;\
-    tar zxf caddy.tar.gz                                                               ;\
-    rm caddy.tar.gz *.txt
+RUN apt-get update && apt-get install -y \
+    curl apache2 php-common libapache2-mod-php php-mcrypt php-mysql
 
-RUN sh -c 'echo -e ":80 :443 { \n root /src \n ext .php .html .htm \n fastcgi / 127.0.0.1:9000 php \n errors stdout \n log stdout\n }" > /Caddyfile'
-WORKDIR /src
+RUN sed -i 's/<VirtualHost [*]:80>/<VirtualHost *:8080>/g' /etc/apache2/sites-available/000-default.conf; \
+    sed -i 's/Listen 80/Listen 8080/g' /etc/apache2/ports.conf;  \
+    sed	-i 's/Listen 443/Listen 4443/g' /etc/apache2/ports.conf; \
+    sed -i 's/index.html index.cgi index.pl index.php index.xhtml index.htm/index.php index.html index.cgi index.pl index.xhtml index.htm/g' /etc/apache2/mods-enabled/dir.conf; \
+    a2enmod rewrite;
 
-RUN sh -c 'echo -e "php-fpm7 --allow-to-run-as-root; /caddy -conf /Caddyfile;" > /run.sh'; \
-    chmod +x /run.sh
+RUN rm -rf /var/www/html && ln -s /html /var/www;
+
+RUN curl https://getcaddy.com | bash -s personal;
+
+RUN sh -c "echo \"${HOST} { \n proxy / localhost:8080 { \n transparent \n } \n errors stdout \n log stdout\n }\" > /Caddyfile"
 
 EXPOSE 80 443
+VOLUME ["/root/.caddy", "/html"]
+WORKDIR /html
+RUN sh -c 'echo "service apache2 restart; caddy -conf /Caddyfile;" > /run.sh'; \
+    chmod +x /run.sh
 
 ENTRYPOINT ["sh", "-c", "/run.sh"]
