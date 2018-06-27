@@ -139,4 +139,16 @@ class EventsModel
         // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
         return $query->fetchAll();
     }
+
+    public function sendEmailTo($user_id, $title, $msg)
+    {
+	$sql = "SELECT email FROM account where id=:user_id";
+	$query = $this->db->prepare($sql);
+	$query->execute(array(':user_id' => $user_id));
+	$statement = $query->fetchAll();
+	$mail_api = "https://hare1039.nctu.me/sendmail";
+	foreach($statement as $row) {
+	    $output = shell_exec("curl -F 'to=" . $row->email . "' -F 'title=" . $title . "' -F 'message=" . $msg . "' " . $mail_api);
+	}
+    }
 }
