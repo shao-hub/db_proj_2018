@@ -257,6 +257,9 @@ class Events extends Controller
                 foreach($obj->team_members as $member_id)
                 {
                     $member_team_list=$events_model->getUserJoinTeams($member_id,$obj->event_id);
+		    $events_model->sendEmailTo($member_id,
+		                               "Hi " . $member_id . ", you now join in new team!",
+					       "Welcome " . $member_id . ", <br> Have a great play!");
                     foreach($member_team_list as $member_team)
                     {
                         if($member_team->id!=$team_id)
