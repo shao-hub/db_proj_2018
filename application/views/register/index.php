@@ -7,24 +7,24 @@
         <script src="<?php echo URL; ?>public/js/register/check_user_id.js"  defer></script>
         <form action="<?php echo URL; ?>register/signup" method="POST">
             <p>
-            <label>ID</label>
+            <label>學號</label>
             <input class="wide" type="text" id="user_id" name="user_id" value="" required><br>
             <span id="user_id_msg"></span>
             </p>
             <p>
-            <label>Name</label>
+            <label>姓名</label>
             <input class="wide" type="text" name="user_name" value="" required>
             </p>
             <p>
-            <label>E-mail</label>
+            <label>電子郵件</label>
             <input class="wide" type="email" name="user_email" value="" required>
             </p>
             <p>
-            <label>Password</label>
+            <label>密碼</label>
             <input class="wide" type="password" id="user_pw" name="user_pw" value="" required>
             </p>
             <p>
-            <label>Confirm Password</label>
+            <label>請再次確認密碼</label>
             <input class="wide" type="password" id="user_pw_conf" name="user_pw_conf" value="" required><br>
             <span id="user_pw_msg"></span>
             </p>
