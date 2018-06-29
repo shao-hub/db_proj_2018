@@ -91,6 +91,11 @@ section h1:first-child, section h2:first-child {
   color: #447777;
 }
 
+.blue-bg {
+  background-color: ;
+  color: white;
+}
+
 table {
   table-layout: fixed;
   border-collapse: collapse;
@@ -210,6 +215,9 @@ textarea {
 }
 .button.blue:focus {
   background-color: #4477bb;
+}
+.button.blue:disabled{
+  background-color: gray;
 }
 .button.red {
   background-color: #dd7777;

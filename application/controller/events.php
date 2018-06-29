@@ -190,10 +190,12 @@ class Events extends Controller
                 $resp_obj->team_name = "New Team";
             } else if (empty($team_list)) {
                 $resp_obj->team_name = "New Team";
+                $resp_obj->signed_up = FALSE;
                 array_push($resp_obj->team_members, array("id" => Auth::getUserId(), "name" => Auth::getUserName()));
             } else {
                 $team = $team_list[0];
                 $resp_obj->team_name = $team->name;
+                $resp_obj->signed_up = TRUE;
                 $members = $events_model->getAllTeamMembers($team->id);
                 foreach ($members as $member) {
                     array_push($resp_obj->team_members, array("id" => $member->id, "name" => $member->name));
