@@ -1,6 +1,13 @@
 <script src="<?php echo URL; ?>public/js/preventleave.js"></script>
 <section>
+
 <h1>活動報名</h1>
+
+    <?php
+        echo '<h3>'.$event_info->name.'</h3>';
+        echo '<h4>Signed up teams&nbsp;:&nbsp;'.count($event_teams).'/'.$event_info->team_limit.'</h4>';
+    ?>
+
  <form>
      <label>Team Name</label>
      <input type="text" id="team_name" name="name" value="" required><br>

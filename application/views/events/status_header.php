@@ -14,6 +14,7 @@
             <tr>
                 <td>隊伍名稱</td>
                 <td>隊伍成員</td>
+                <td>刪除隊伍</td>
             </tr>
             </thead>
             <tbody>
