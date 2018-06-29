@@ -80,13 +80,13 @@ class EventsModel
         return $query->fetch();
     }
 
-    public function addEvent($name, $date, $team_limit, $team_size_limit)
+    public function addEvent($name, $date, $team_limit, $team_size_limit, $description = "")
     {
         // clean the input from javascript code for example
 
-        $sql = "INSERT INTO events (name, `date`, team_limit,team_size_limit ) VALUES (:name, :date, :team_limit,:team_size_limit)";
+        $sql = "INSERT INTO events (name, `date`, team_limit,team_size_limit, description) VALUES (:name, :date, :team_limit,:team_size_limit,:description)";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':name' => $name, ':date' => $date, ':team_limit' => $team_limit, ':team_size_limit' => $team_size_limit));
+        $query->execute(array(':name' => $name, ':date' => $date, ':team_limit' => $team_limit, ':team_size_limit' => $team_size_limit, ':description' => $description));
     }
 
     public function addTeam($name, $event_id, $team_members)
@@ -104,13 +104,13 @@ class EventsModel
         }
     }
 
-    public function editEvent($id, $name, $date, $team_limit, $team_size_limit)
+    public function editEvent($id, $name, $date, $team_limit, $team_size_limit, $description = "")
     {
         // clean the input from javascript code for example
 
-        $sql = "UPDATE events SET name=:name, `date`=:date, team_limit=:team_limit, team_size_limit=:team_size_limit where id=:id";
+        $sql = "UPDATE events SET name=:name, `date`=:date, team_limit=:team_limit, team_size_limit=:team_size_limit, description=:description where id=:id";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':id' => $id, ':name' => $name, ':date' => $date, ':team_limit' => $team_limit, ':team_size_limit' => $team_size_limit));
+        $query->execute(array(':id' => $id, ':name' => $name, ':date' => $date, ':team_limit' => $team_limit, ':team_size_limit' => $team_size_limit, ':description' => $description));
     }
 
     public function deleteEvent($event_id)

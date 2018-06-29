@@ -37,7 +37,7 @@ class Events extends Controller
         if (isset($_POST["submit_add_event"])) {
             // load model, perform an action on the model
             $events_model = $this->loadModel('EventsModel');
-            $events_model->addEvent($_POST["name"], $_POST["date"], $_POST["team_limit"], $_POST["team_size_limit"]);
+            $events_model->addEvent($_POST["name"], $_POST["date"], $_POST["team_limit"], $_POST["team_size_limit"], $_POST["description"]);
             $this->redirectToHome();
         }
 
@@ -56,7 +56,7 @@ class Events extends Controller
         if (isset($_POST["submit_edit_event"])) {
             // load model, perform an action on the model
             $events_model = $this->loadModel('EventsModel');
-            $events_model->editEvent($event_id, $_POST["name"], $_POST["date"], $_POST["team_limit"], $_POST["team_size_limit"]);
+            $events_model->editEvent($event_id, $_POST["name"], $_POST["date"], $_POST["team_limit"], $_POST["team_size_limit"], $_POST["description"]);
             $this->redirectToHome();
         }
 

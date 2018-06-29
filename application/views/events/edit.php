@@ -19,6 +19,10 @@
                 <label for="team_size_limit">每隊人數上限</label><br>
                 <input class="wide" type="number" id="team_size_limit" name="team_size_limit" min="1">
             </p>
+            <p>
+                <label for="description">規則</label>
+                <textarea class="wide" name="description" id="description"></textarea></p>
+            <p>
             <input class="button cyan" type="submit" name="submit_edit_event" value="儲存" />
             <button class="button red" type="button" onclick='location.href="<?php echo URL; ?>events";'>取消</button>
         </form>
@@ -32,5 +36,6 @@
     seti("date",<?=json_encode($event->date)?>);
     seti("team_limit",<?=json_encode($event->team_limit)?>);
     seti("team_size_limit",<?=json_encode($event->team_size_limit)?>);
+    seti("description",<?=json_encode($event->description)?>);
 })();
 </script>
