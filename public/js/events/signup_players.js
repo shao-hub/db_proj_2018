@@ -4,6 +4,7 @@ document.getElementById("team_name").addEventListener("input",preventLeave);
 var table_container=document.getElementById("player_list");
 var new_player_id=document.getElementById("new_player_id")
 var error_msg=document.getElementById("error_msg")
+var signed_up_msg=document.getElementById("signed_up_msg")
 var max_team_member=parseInt(document.getElementById("max_team_member").value);
 var min_team_member=1;
 var player_list=
@@ -34,9 +35,9 @@ var player_list=
             var player_table = document.createElement("TABLE");
             var header=player_table.createTHead();
             var header_row=header.insertRow();
-            header_row.insertCell().textContent="User ID";
-            header_row.insertCell().textContent="User Name";
-            header_row.insertCell().textContent="Delete";
+            header_row.insertCell().textContent="學號";
+            header_row.insertCell().textContent="姓名";
+            header_row.insertCell().textContent="刪除";
 
             for(var i=0;i<this.player_arr.length;i++)
             {
@@ -44,7 +45,11 @@ var player_list=
                 new_row.insertCell().textContent=this.player_arr[i].id;
                 new_row.insertCell().textContent=this.player_arr[i].name;
                 var delete_button=document.createElement("button");
-                delete_button.textContent="Delete player"
+                delete_button.className = "red button"
+                if (this.player_arr[i].id === this.myself)
+                    delete_button.textContent="退出隊伍"
+                else
+                    delete_button.textContent="刪除組員"
                 delete_button.addEventListener("click", player_list.delPlayer.bind(player_list,i));
                 new_row.insertCell().appendChild(delete_button);
             }
@@ -93,7 +98,7 @@ function add_player()
         }
         if(player_list.checkPlayerExist(new_player_id.value))
         {
-            error_msg.textContent="User ID already added";
+            error_msg.textContent="此人已在報名表上";
             return;
         }
 
@@ -111,7 +116,7 @@ function add_player()
                 }
                 else
                 {
-                    error_msg.textContent="User ID does not exist";
+                    error_msg.textContent="用戶不存在";
                 }
 
             }
@@ -125,6 +130,7 @@ function add_player()
 
 function submit_team()
 {
+    if (!confirm("你確定要報名嗎？")) return;
     var obj=
         {
             event_id:document.getElementById("event_id").value,
@@ -179,6 +185,8 @@ function get_team_info()
             }
             player_list.myself = Resp.myself;
             player_list.draw_all_players();
+            if (Resp.signed_up === true) signed_up_msg.innerHTML = "你已經報名此活動";
+            if (Resp.signed_up === false) signed_up_msg.innerHTML = "你尚未報名";
         }
     };
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -201,7 +209,7 @@ function leave_team()
             var Resp = JSON.parse(this.responseText);
             if(Resp.valid==="true")
             {
-                alert("Success");
+                alert("成功");
                 canNowLeave();
                 window.location.href = Globals.URL+"events";
             }

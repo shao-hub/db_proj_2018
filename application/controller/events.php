@@ -37,7 +37,7 @@ class Events extends Controller
         if (isset($_POST["submit_add_event"])) {
             // load model, perform an action on the model
             $events_model = $this->loadModel('EventsModel');
-            $events_model->addEvent($_POST["name"], $_POST["date"], $_POST["team_limit"], $_POST["team_size_limit"]);
+            $events_model->addEvent($_POST["name"], $_POST["date"], $_POST["team_limit"], $_POST["team_size_limit"], $_POST["description"]);
             $this->redirectToHome();
         }
 
@@ -56,7 +56,7 @@ class Events extends Controller
         if (isset($_POST["submit_edit_event"])) {
             // load model, perform an action on the model
             $events_model = $this->loadModel('EventsModel');
-            $events_model->editEvent($event_id, $_POST["name"], $_POST["date"], $_POST["team_limit"], $_POST["team_size_limit"]);
+            $events_model->editEvent($event_id, $_POST["name"], $_POST["date"], $_POST["team_limit"], $_POST["team_size_limit"], $_POST["description"]);
             $this->redirectToHome();
         }
 
@@ -190,10 +190,12 @@ class Events extends Controller
                 $resp_obj->team_name = "New Team";
             } else if (empty($team_list)) {
                 $resp_obj->team_name = "New Team";
+                $resp_obj->signed_up = FALSE;
                 array_push($resp_obj->team_members, array("id" => Auth::getUserId(), "name" => Auth::getUserName()));
             } else {
                 $team = $team_list[0];
                 $resp_obj->team_name = $team->name;
+                $resp_obj->signed_up = TRUE;
                 $members = $events_model->getAllTeamMembers($team->id);
                 foreach ($members as $member) {
                     array_push($resp_obj->team_members, array("id" => $member->id, "name" => $member->name));
